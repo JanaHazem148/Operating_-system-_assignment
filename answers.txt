@@ -1,0 +1,70 @@
+##Lab 5:
+##example 1 explanation:
+is a c program that demonstrates the process creation using the fork() which duplicates the program and we have two running programs the parent (pid>0) and the child (pid ==0) and each run its own printf() 
+which actually explain the foundation of multiprocessing in linux.
+
+##example 2 explanation:
+sleep 300& tells the system to wait for 300 sec while adding the & at the end actually starts the command in the background
+where the output show the job number and the process ID (PID)
+while the command jobs shows all processess started in the background from your current terminal session
+
+##example 3 explanation:
+ps aux | grep sleep : lists all the running processes, then filters
+for the  word sleep to show only the pid connected to any sleep command
+kill PID (instead of PID here we write the actual process ID)
+and this sends a signal to stop the process normally
+then to verify that it has stopped we can code ps aux | grep sleep again as it show if it stopped or not
+
+##example 4 explanation:
+kill -STOP <PID>
+actually pauses the process by frozen the memory
+kill -CONT <PID>
+resumes exactly where it stopped 
+
+##example 5 explanation:
+show how the linker work,where each file is compiled individually then linker resolves external symbols 
+file2.c calls hello(), but does not define it.
+then the linker finds hello() inside file1.o.
+It connects them inside the final executable.
+where Functions can be split across multiple files.
+
+##example 6 explanation:
+This exercise shows how the dynamic loader loads shared libraries needed by a C program at runtime.
+ldd displays all shared libraries dynamically linked to your program.
+ the output:linux-vdso.so.1 (0x00007ffc12345000)
+libc.so.6 => /usr/lib/libc.so.6 (0x00007f59b23a0000)
+ld-linux-x86-64.so.2 => /usr/lib/ld-linux-x86-64.so.2 (0x00007f59b25a0000)
+which are the libraries that are required for the program to execute.
+
+
+##explanation of both the linker and the loader and what they do:
+#The linker : 
+is a tool that takes all the parts of your program (called object files) and combines them into a single, working program or executable file.
+
+Here’s what it does:
+
+Puts everything together: It takes all your compiled code (from different files) and combines them into one file that can be run.
+
+Fixes references: If one part of your code calls a function or uses data from another part, the linker makes sure those references are correctly connected, so everything works.
+
+Assigns addresses: It figures out where to put all the different pieces of code and data in memory, so the program runs properly.
+
+Links to libraries: If your program uses external libraries (like math functions), the linker connects your program to those libraries, so they can be used when your program runs.
+
+In short, the linker glues anything together 
+
+
+
+#The loader :
+is a part of the operating system that works closely with the linker to get a program running. Here’s a simple breakdown of its job:
+
+1. Loads the program into memory: After the linker has created the executable file, the loader’s job is to load this file into the computer’s memory (RAM) so it can be run.
+
+2. Allocates memory: The loader makes space for the program in memory. It sets aside areas for the program’s code, data, and any additional resources it needs.
+
+3. Handles addresses: If the program was linked with **dynamic libraries** (like `.dll` or `.so` files), the loader makes sure the program knows where to find those libraries and loads them into memory too.
+
+4. Starts the program: Once everything is loaded, the loader passes control to the program’s starting point (like the `main()` function), allowing it to start running.
+
+In short, the loader is responsible for putting the program in memory and starting it up so it can run on your computer.
+
